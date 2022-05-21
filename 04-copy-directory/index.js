@@ -1,23 +1,29 @@
 const path = require('path');
 const { stdout } = require('process');
 const { mkdir, readdir, copyFile, rm } = require('fs/promises');
+const filesFolder = path.join(__dirname, 'files');
+const filesCopyFolder = path.join(__dirname, 'files-copy');
 
 async function createCopyFiles() {
   try {
     await removeCopyFiles();
-    await mkdir(path.join(__dirname, 'files-copy'), { recursive: true });
-    const files = await readdir(path.join(__dirname, 'files'), { withFileTypes: true });
+    await mkdir(filesCopyFolder, { recursive: true });
+    const files = await readdir(filesFolder, { withFileTypes: true });
+
     for (const file of files) {
-      await copyFile(path.join(__dirname, 'files', file.name), path.join(__dirname, 'files-copy', file.name));
+      const fileName = path.join(filesFolder, file.name);
+      const fileCopyName = path.join(filesCopyFolder, file.name);
+      await copyFile(fileName, fileCopyName);
     }
-    stdout.write('Copied in files-copy \r\n');
+
+    stdout.write('Copied in files-copy\n');
   } catch (err) {
     throw err;
   }
 }
 
 async function removeCopyFiles() {
-  await rm(path.join(__dirname, 'files-copy'), { recursive: true, force: true });
+  await rm(filesCopyFolder, { recursive: true, force: true });
 }
 
 createCopyFiles();
