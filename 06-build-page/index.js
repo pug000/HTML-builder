@@ -23,7 +23,7 @@ class BuildPage {
       await this.createStyleFile();
       await this.mergeComponentsFile();
     } catch (err) {
-      throw err;
+      throw new err;
     }
   }
 
@@ -58,7 +58,7 @@ class BuildPage {
 
   async createStyleFile() {
     const writeStream = fs.createWriteStream(this.style);
-    await this.mergeStylesInStyleFile(writeStream)
+    await this.mergeStylesInStyleFile(writeStream);
   }
 
   async mergeStylesInStyleFile(writeStream) {

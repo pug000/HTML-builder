@@ -49,7 +49,7 @@ async function mergeStylesInBundleFile() {
     }
     stdout.write('styles has been merged into bundle.css file\n');
   } catch (err) {
-    throw err;
+    throw new err;
   }
 }
 

@@ -18,7 +18,7 @@ async function createCopyFiles() {
 
     stdout.write('Copied in files-copy\n');
   } catch (err) {
-    throw err;
+    throw new err;
   }
 }
 

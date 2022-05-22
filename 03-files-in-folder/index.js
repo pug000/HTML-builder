@@ -10,7 +10,7 @@ async function readDir() {
     const files = await readdir(secretFolder, { withFileTypes: true });
 
     for (const file of files) {
-      const secretFile = path.join(secretFolder, file.name)
+      const secretFile = path.join(secretFolder, file.name);
       fs.stat(secretFile, (err, stats) => {
 
         if (err) {
@@ -21,10 +21,10 @@ async function readDir() {
           const kbSize = (stats.size / 1024).toFixed(3);
           stdout.write(`${fileName} - ${format} - ${kbSize}KB \n`);
         }
-      })
-    };
+      });
+    }
   } catch (err) {
-    throw err;
+    throw new err;
   }
 }
 
